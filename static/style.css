@@ -1,0 +1,78 @@
+body{
+
+    background:#f4f4f4;
+
+    font-family:Arial;
+
+}
+
+.contenedor{
+
+    width:500px;
+
+    margin:40px auto;
+
+    background:white;
+
+    padding:30px;
+
+    border-radius:10px;
+
+    box-shadow:0px 0px 10px gray;
+
+}
+
+h1{
+
+    text-align:center;
+
+}
+
+h2{
+
+    text-align:center;
+
+    color:gray;
+
+    font-size:18px;
+
+}
+
+label{
+
+    display:block;
+
+    margin-top:20px;
+
+}
+
+input,select{
+
+    width:100%;
+
+    padding:10px;
+
+}
+
+button{
+
+    width:100%;
+
+    margin-top:25px;
+
+    padding:12px;
+
+    font-size:16px;
+
+}
+footer{
+
+    margin-top:40px;
+
+    text-align:center;
+
+    color:#666;
+
+    font-size:15px;
+
+}

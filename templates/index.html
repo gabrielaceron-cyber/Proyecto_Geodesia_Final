@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+<meta charset="UTF-8">
+
+<title>Calculadora de Ondulación Geoidal</title>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<div class="contenedor">
+
+<h1>Calculadora de Ondulación Geoidal</h1>
+
+<h2>Proyecto Final - Geodesia </h2>
+
+<form method="POST">
+
+<label>Modelo Geoidal</label>
+
+<select name="modelo">
+
+<option>GeoCOL 2004</option>
+
+<option>GeoValle 2015</option>
+
+</select>
+
+<label>Latitud</label>
+
+<input
+type="number"
+step="any"
+name="latitud"
+required>
+
+<label>Longitud</label>
+
+<input
+type="number"
+step="any"
+name="longitud"
+required>
+
+<label>Altura Elipsoidal (m)</label>
+
+<input
+type="number"
+step="any"
+name="altura"
+required>
+
+<button type="submit">
+
+Calcular
+
+</button>
+
+</form>
+
+{% if error %}
+
+<div class="resultado">
+
+<h3>{{ error }}</h3>
+
+</div>
+
+{% endif %}
+
+{% if N %}
+
+<div class="resultado">
+
+<h2>Resultados</h2>
+
+<p><b>Modelo:</b> {{ modelo }}</p>
+
+<p><b>Latitud:</b> {{ latitud }}</p>
+
+<p><b>Longitud:</b> {{ longitud }}</p>
+
+<p><b>Altura elipsoidal:</b> {{ h }} m</p>
+
+<p><b>Ondulación geoidal (N):</b> {{ N }} m</p>
+
+<p><b>Altura ortométrica (H):</b> {{ H }} m</p>
+
+</div>
+
+{% endif %}
+
+</div>
+
+<footer>
+
+    <hr>
+
+    <p>
+        Proyecto Final - Geodesia Geométrica
+    </p>
+
+    <p>
+        Universidad del Valle
+    </p>
+
+    <p>
+        Ingeniería Geomática
+    </p>
+
+</footer>
+
+</body>
+
+</html>
