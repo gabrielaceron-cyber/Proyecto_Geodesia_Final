@@ -23,7 +23,7 @@ def cargar_modelo(opcion):
             paso_lat,
             paso_lon,
             matriz
-        ) = leer_modelo("modelos/GeoCOL2004.txt")
+        ) = leer_modelo("modelos/Geocol2004.txt")
 
         return {
             "sistema": "geografico",
