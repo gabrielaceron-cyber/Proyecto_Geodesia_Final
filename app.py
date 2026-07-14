@@ -13,7 +13,7 @@ app = Flask(__name__)
 
 def cargar_modelo(opcion):
 
-    if opcion == "GeoCOL 2004":
+    if opcion == "Geocol 2004":
 
         (
             lat_min,
@@ -27,7 +27,7 @@ def cargar_modelo(opcion):
 
         return {
 
-            "tipo": "GeoCOL",
+            "tipo": "Geocol",
 
             "lat_min": lat_min,
             "lat_max": lat_max,
@@ -115,7 +115,7 @@ def convertir_coordenadas(sistema, coord1, coord2):
 
 def obtener_indices(modelo, lat, lon):
 
-    if modelo["tipo"] == "GeoCOL":
+    if modelo["tipo"] == "Geocol":
 
         fila = (
             lat - modelo["lat_min"]
@@ -318,7 +318,7 @@ def inicio():
         # Año del modelo
         # ===========================
 
-        if modelo_nombre == "GeoCOL 2004":
+        if modelo_nombre == "Geocol 2004":
 
             fecha_modelo = "2004"
 
