@@ -11,43 +11,101 @@
 
 </head>
 
+
 <body>
+
 
 <div class="contenedor">
 
+
 <h1>Calculadora de Ondulación Geoidal</h1>
 
-<h2>Proyecto Final - Geodesia </h2>
+<h2>Proyecto Final - Geodesia Geométrica</h2>
+
+
 
 <form method="POST">
 
-<label>Modelo Geoidal</label>
 
-<select name="modelo">
+<label>Sistema de coordenadas</label>
 
-<option>GeoCOL 2004</option>
 
-<option>GeoValle 2015</option>
+<select name="sistema" id="sistema" onchange="cambiarSistema()">
+
+
+<option value="geo">
+Geográficas (Latitud / Longitud)
+</option>
+
+
+<option value="9377">
+EPSG:9377 - MAGNA-SIRGAS Origen Único Nacional
+</option>
+
+
+<option value="6249">
+EPSG:6249 - MAGNA-SIRGAS Cali Urban Grid
+</option>
+
 
 </select>
 
-<label>Latitud</label>
+
+
+
+<label>Modelo Geoidal</label>
+
+
+<select name="modelo">
+
+
+<option value="GeoCOL 2004">
+GeoCOL 2004 (Nacional)
+</option>
+
+
+<option value="GeoValle 2015">
+GeoValle 2015 (Valle del Cauca)
+</option>
+
+
+</select>
+
+
+
+
+<label id="lbl1">
+Latitud
+</label>
+
 
 <input
 type="number"
 step="any"
-name="latitud"
+name="coord1"
 required>
 
-<label>Longitud</label>
+
+
+
+<label id="lbl2">
+Longitud
+</label>
+
 
 <input
 type="number"
 step="any"
-name="longitud"
+name="coord2"
 required>
 
-<label>Altura Elipsoidal (m)</label>
+
+
+
+<label>
+Altura Elipsoidal h (m)
+</label>
+
 
 <input
 type="number"
@@ -55,66 +113,179 @@ step="any"
 name="altura"
 required>
 
+
+
 <button type="submit">
 
-Calcular
+Calcular Ondulación
 
 </button>
 
+
 </form>
+
+
+
+
 
 {% if error %}
 
+
+<div class="resultado error">
+
+<h3>
+{{error}}
+</h3>
+
+
+</div>
+
+
+{% endif %}
+
+
+
+{% if N is not none %}
+
 <div class="resultado">
 
-<h3>{{ error }}</h3>
+<h2>Resultados del cálculo</h2>
+
+<hr>
+
+<p>
+<b>Modelo geoidal:</b>
+{{ modelo }}
+</p>
+
+<p>
+<b>Latitud:</b>
+{{ latitud }}°
+</p>
+
+<p>
+<b>Longitud:</b>
+{{ longitud }}°
+</p>
+
+<p>
+<b>Coordenadas GMS:</b>
+</p>
+
+<p>
+<b>Latitud:</b>
+{{ lat_gms }}
+</p>
+
+<p>
+<b>Longitud:</b>
+{{ lon_gms }}
+</p>
+
+<p>
+<b>Altura elipsoidal (h):</b>
+{{ h }} m
+</p>
+
+<p>
+<b>Ondulación geoidal (N):</b>
+{{ N }} m
+</p>
+
+<p>
+<b>Altura ortométrica (H=h-N):</b>
+{{ H }} m
+</p>
+
+<p>
+<b>Modelo generado:</b>
+{{ fecha_modelo }}
+</p>
 
 </div>
 
 {% endif %}
 
-{% if N %}
 
-<div class="resultado">
 
-<h2>Resultados</h2>
-
-<p><b>Modelo:</b> {{ modelo }}</p>
-
-<p><b>Latitud:</b> {{ latitud }}</p>
-
-<p><b>Longitud:</b> {{ longitud }}</p>
-
-<p><b>Altura elipsoidal:</b> {{ h }} m</p>
-
-<p><b>Ondulación geoidal (N):</b> {{ N }} m</p>
-
-<p><b>Altura ortométrica (H):</b> {{ H }} m</p>
 
 </div>
 
-{% endif %}
 
-</div>
+
+
 
 <footer>
 
-    <hr>
+<hr>
 
-    <p>
-        Proyecto Final - Geodesia Geométrica
-    </p>
+<p>
+Proyecto Final - Geodesia Geométrica
+</p>
 
-    <p>
-        Universidad del Valle
-    </p>
+<p>
+Universidad del Valle
+</p>
 
-    <p>
-        Ingeniería Geomática
-    </p>
+<p>
+Ingeniería Geomática
+</p>
+
 
 </footer>
 
+
+
+
+
+<script>
+
+
+function cambiarSistema(){
+
+
+let sistema =
+document.getElementById("sistema").value;
+
+
+let lbl1 =
+document.getElementById("lbl1");
+
+
+let lbl2 =
+document.getElementById("lbl2");
+
+
+
+if(sistema=="geo"){
+
+
+lbl1.innerHTML="Latitud (°)";
+
+lbl2.innerHTML="Longitud (°)";
+
+
+}
+
+else{
+
+
+lbl1.innerHTML="Norte (m)";
+
+lbl2.innerHTML="Este (m)";
+
+
+}
+
+
+}
+
+
+</script>
+
+
+
 </body>
+
 
 </html>
