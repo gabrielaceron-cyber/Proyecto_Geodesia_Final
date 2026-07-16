@@ -6,6 +6,9 @@ from geodesia.lector_tif import leer_tif
 
 app = Flask(__name__)
 
+@app.route("/test")
+def test():
+    return "Funciona correctamente"
 
 # ==========================================
 # CARGAR MODELO
@@ -92,6 +95,12 @@ def convertir_coordenadas(sistema, coord1, coord2):
             coord2,
             coord1
         )
+
+        print("=== EPSG 9377 ===")
+        print("Norte:", coord1)
+        print("Este:", coord2)
+        print("Latitud:", lat)
+        print("Longitud:", lon)
 
     elif sistema == "6249":
 
