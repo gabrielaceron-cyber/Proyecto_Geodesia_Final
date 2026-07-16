@@ -214,6 +214,18 @@ def interpolacion(modelo, lat, lon):
 
     return round(float(N), 4)
 
+# ==========================================
+# GMS A DECIMAL
+# ==========================================
+
+def gms_a_decimal(grados, minutos, segundos, hemisferio):
+
+    decimal = abs(grados) + (minutos / 60) + (segundos / 3600)
+
+    if hemisferio in ["S", "O"]:
+        decimal *= -1
+
+    return decimal
 
 # ==========================================
 # DECIMAL A GMS
@@ -253,8 +265,53 @@ def inicio():
 
         sistema = request.form["sistema"]
 
-        coord1 = float(request.form["coord1"])
-        coord2 = float(request.form["coord2"])
+        formato = request.form.get("formato", "decimal")
+
+        print("===== FORMULARIO =====")
+        print(request.form)
+        print("======================")
+     
+        if sistema == "geo" and formato == "gms":
+
+            print("===== GMS =====")
+            print(request.form)
+            print("===============")
+
+            lat_g = float(request.form["lat_g"])
+            lat_m = float(request.form["lat_m"])
+            lat_s = float(request.form["lat_s"])
+            lat_h = request.form["lat_h"]
+
+            lon_g = float(request.form["lon_g"])
+            lon_m = float(request.form["lon_m"])
+            lon_s = float(request.form["lon_s"])
+            lon_h = request.form["lon_h"]
+            
+            print("Entró por GMS")
+            print("Latitud:", lat_g, lat_m, lat_s, lat_h)
+            print("Longitud:", lon_g, lon_m, lon_s, lon_h)
+
+            coord1 = gms_a_decimal(
+                lat_g,
+                lat_m,
+                lat_s,
+                lat_h
+            )
+
+            coord2 = gms_a_decimal(
+                lon_g,
+                lon_m,
+                lon_s,
+                lon_h
+            )
+
+            print("Lat decimal:", coord1)
+            print("Lon decimal:", coord2)
+
+        else:
+
+            coord1 = float(request.form["coord1"])
+            coord2 = float(request.form["coord2"])
 
         h = float(request.form["altura"])
 

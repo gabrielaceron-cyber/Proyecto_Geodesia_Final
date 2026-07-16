@@ -88,7 +88,7 @@ GeoValle 2015 (Valle del Cauca)
 </select>
 
 
-
+<div id="decimal_div">
 
 <label id="lbl1">
 Latitud
@@ -99,6 +99,7 @@ Latitud
 type="number"
 step="any"
 name="coord1"
+id="coord1"
 required>
 
 
@@ -113,10 +114,38 @@ Longitud
 type="number"
 step="any"
 name="coord2"
+id="coord2"
 required>
 
+</div>
 
+<div id="gms_div" style="display:none;">
 
+<h4>Latitud</h4>
+
+<input type="number" name="lat_g" placeholder="Grados">
+<input type="number" name="lat_m" placeholder="Minutos">
+<input type="number" step="any" name="lat_s" placeholder="Segundos">
+
+<select name="lat_h">
+    <option value="N">Norte</option>
+    <option value="S">Sur</option>
+</select>
+
+<br><br>
+
+<h4>Longitud</h4>
+
+<input type="number" name="lon_g" placeholder="Grados">
+<input type="number" name="lon_m" placeholder="Minutos">
+<input type="number" step="any" name="lon_s" placeholder="Segundos">
+
+<select name="lon_h">
+    <option value="O">Oeste</option>
+    <option value="E">Este</option>
+</select>
+
+</div>
 
 <label>
 Altura Elipsoidal h (m)
@@ -294,7 +323,73 @@ cambiarFormato();
 
 }
 
+function cambiarFormato(){
+    
+alert("Entró a cambiarFormato");
 
+let formato =
+document.getElementById("formato").value;
+
+let decimal =
+document.getElementById("decimal_div");
+
+let gms =
+document.getElementById("gms_div");
+
+let coord1 =
+document.getElementById("coord1");
+
+let coord2 =
+document.getElementById("coord2");
+
+// Campos GMS
+let lat_g = document.getElementsByName("lat_g")[0];
+let lat_m = document.getElementsByName("lat_m")[0];
+let lat_s = document.getElementsByName("lat_s")[0];
+
+let lon_g = document.getElementsByName("lon_g")[0];
+let lon_m = document.getElementsByName("lon_m")[0];
+let lon_s = document.getElementsByName("lon_s")[0];
+
+if(formato=="decimal"){
+
+    decimal.style.display="block";
+    gms.style.display="none";
+
+    coord1.required=true;
+    coord2.required=true;
+
+    lat_g.required=false;
+    lat_m.required=false;
+    lat_s.required=false;
+
+    lon_g.required=false;
+    lon_m.required=false;
+    lon_s.required=false;
+
+}
+else{
+
+    decimal.style.display="none";
+    gms.style.display="block";
+
+    coord1.required=false;
+    coord2.required=false;
+
+    lat_g.required=true;
+    lat_m.required=true;
+    lat_s.required=true;
+
+    lon_g.required=true;
+    lon_m.required=true;
+    lon_s.required=true;
+
+}
+
+}
+
+cambiarSistema();
+cambiarFormato();
 </script>
 
 
