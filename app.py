@@ -6,6 +6,9 @@ from geodesia.lector_tif import leer_tif
 
 app = Flask(__name__)
 
+@app.route("/test")
+def test():
+    return "Funciona correctamente"
 
 # ==========================================
 # CARGAR MODELO
