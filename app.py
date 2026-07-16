@@ -83,24 +83,27 @@ def convertir_coordenadas(sistema, coord1, coord2):
         lat = coord1
         lon = coord2
 
-    elif sistema == "9377":
+elif sistema == "9377":
 
-        transformer = Transformer.from_crs(
-            9377,
-            4326,
-            always_xy=True
-        )
+    transformer = Transformer.from_crs(
+        "EPSG:9377",
+        "EPSG:4326",
+        always_xy=True
+    )
 
-        lon, lat = transformer.transform(
-            coord2,
-            coord1
-        )
+    lon, lat = transformer.transform(
+        coord2,
+        coord1
+    )
 
-        print("=== EPSG 9377 ===")
-        print("Norte:", coord1)
-        print("Este:", coord2)
-        print("Latitud:", lat)
-        print("Longitud:", lon)
+    print("========================")
+    print("EPSG 9377")
+    print("X (Este):", coord2)
+    print("Y (Norte):", coord1)
+    print("Resultado")
+    print("Latitud:", lat)
+    print("Longitud:", lon)
+    print("========================")
 
     elif sistema == "6249":
 
