@@ -50,7 +50,23 @@ EPSG:6249 - MAGNA-SIRGAS Cali Urban Grid
 
 </select>
 
+<div id="formato_div">
 
+<label>Formato de coordenadas</label>
+
+<select name="formato" id="formato" onchange="cambiarFormato()">
+
+<option value="decimal">
+Grados Decimales (DD)
+</option>
+
+<option value="gms">
+Grados Minutos Segundos (GMS)
+</option>
+
+</select>
+
+</div>
 
 
 <label>Modelo Geoidal</label>
@@ -243,40 +259,38 @@ Ingeniería Geomática
 
 function cambiarSistema(){
 
-
 let sistema =
 document.getElementById("sistema").value;
-
 
 let lbl1 =
 document.getElementById("lbl1");
 
-
 let lbl2 =
 document.getElementById("lbl2");
 
-
+let formato =
+document.getElementById("formato_div");
 
 if(sistema=="geo"){
 
+formato.style.display="block";
 
 lbl1.innerHTML="Latitud (°)";
 
 lbl2.innerHTML="Longitud (°)";
 
-
 }
-
 else{
 
+formato.style.display="none";
 
 lbl1.innerHTML="Norte (m)";
 
 lbl2.innerHTML="Este (m)";
 
-
 }
 
+cambiarFormato();
 
 }
 
