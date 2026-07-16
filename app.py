@@ -80,36 +80,23 @@ def convertir_coordenadas(sistema, coord1, coord2):
 
     if sistema == "geo":
 
+        # Coordenadas geográficas
+        # coord1 = latitud
+        # coord2 = longitud
+
         lat = coord1
         lon = coord2
 
-elif sistema == "9377":
 
-    transformer = Transformer.from_crs(
-        "EPSG:9377",
-        "EPSG:4326",
-        always_xy=True
-    )
+    elif sistema == "9377":
 
-    lon, lat = transformer.transform(
-        coord2,
-        coord1
-    )
-
-    print("========================")
-    print("EPSG 9377")
-    print("X (Este):", coord2)
-    print("Y (Norte):", coord1)
-    print("Resultado")
-    print("Latitud:", lat)
-    print("Longitud:", lon)
-    print("========================")
-
-    elif sistema == "6249":
+        # MAGNA-SIRGAS Origen Nacional
+        # coord1 = Norte (Y)
+        # coord2 = Este (X)
 
         transformer = Transformer.from_crs(
-            6249,
-            4326,
+            "EPSG:9377",
+            "EPSG:4326",
             always_xy=True
         )
 
@@ -117,6 +104,33 @@ elif sistema == "9377":
             coord2,
             coord1
         )
+
+
+    elif sistema == "6249":
+
+        # MAGNA-SIRGAS geográfico 3D
+        # coord1 = Latitud
+        # coord2 = Longitud
+
+        lat = coord1
+        lon = coord2
+
+
+    else:
+
+        raise ValueError("Sistema de coordenadas no válido")
+
+
+    print("==============================")
+    print("Sistema:", sistema)
+    print("Entrada:")
+    print("Coord1:", coord1)
+    print("Coord2:", coord2)
+    print("Resultado:")
+    print("Latitud:", lat)
+    print("Longitud:", lon)
+    print("==============================")
+
 
     return lat, lon
 
@@ -253,19 +267,24 @@ def inicio():
             coord1,
             coord2
         )
-
+        
+        print("******** RESULTADO FINAL ********")
+        print("Sistema:", sistema)
+        print("Latitud:", lat)
+        print("Longitud:", lon)
+        print("*********************************")
         # ===========================
         # Validaciones
         # ===========================
 
-        if lat < -4.5 or lat > 13.5:
+        if lat < -5.0 or lat > 14.0:
 
             return render_template(
                 "index.html",
                 error="La latitud está fuera del territorio colombiano."
             )
 
-        if lon < -79.5 or lon > -66.5:
+        if lon < -80.0 or lon > -66.0:
 
             return render_template(
                 "index.html",
